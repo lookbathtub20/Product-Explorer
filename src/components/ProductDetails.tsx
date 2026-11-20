@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../data/products';
+import { formatPrice } from '../utils/formatPrice';
 
 export function ProductDetails() {
   const { id } = useParams<{ id: string }>();
@@ -26,7 +27,7 @@ export function ProductDetails() {
       <div className="detail-copy">
         <p className="product-category">{product.category}</p>
         <h2 id="detail-name">{product.name}</h2>
-        <p className="detail-price">${product.price.toFixed(2)}</p>
+        <p className="detail-price">{formatPrice(product.price)}</p>
         <p className="detail-description">
           A thoughtfully selected {product.category.toLowerCase()} essential, designed to bring
           lasting usefulness and a little more ease to your everyday.

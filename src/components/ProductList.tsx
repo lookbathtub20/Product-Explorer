@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { products } from '../data/products';
 
@@ -6,13 +6,17 @@ export function ProductList() {
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All categories');
   const categories = Array.from(new Set(products.map((product) => product.category))).sort();
-  const visibleProducts = products.filter((product) => {
-    const matchesName = product.name.toLowerCase().includes(searchText.trim().toLowerCase());
-    const matchesCategory =
-      selectedCategory === 'All categories' || product.category === selectedCategory;
+  const visibleProducts = useMemo(() => {
+    const normalizedSearch = searchText.trim().toLowerCase();
 
-    return matchesName && matchesCategory;
-  });
+    return products.filter((product) => {
+      const matchesName = product.name.toLowerCase().includes(normalizedSearch);
+      const matchesCategory =
+        selectedCategory === 'All categories' || product.category === selectedCategory;
+
+      return matchesName && matchesCategory;
+    });
+  }, [searchText, selectedCategory]);
 
   return (
     <section aria-label="Products" className="product-section">

@@ -1,11 +1,33 @@
 import './App.css';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ProductDetails } from './components/ProductDetails';
 import { ProductList } from './components/ProductList';
+import { products } from './data/products';
+
+function DocumentTitle() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === '/products') {
+      document.title = 'Products | The Everyday Edit';
+      return;
+    }
+
+    const productId = Number(pathname.split('/').pop());
+    const product = products.find((item) => item.id === productId);
+    document.title = product
+      ? `${product.name} | The Everyday Edit`
+      : 'Product not found | The Everyday Edit';
+  }, [pathname]);
+
+  return null;
+}
 
 export function App() {
   return (
     <BrowserRouter>
+      <DocumentTitle />
       <main className="page-shell">
         <header className="page-header">
           <p className="eyebrow">THE EVERYDAY EDIT</p>
