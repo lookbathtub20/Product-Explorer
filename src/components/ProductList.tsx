@@ -21,7 +21,6 @@ export function ProductList() {
   return (
     <section aria-label="Products" className="product-section">
       <div className="section-heading">
-        <h2>Our picks</h2>
         <span>
           {visibleProducts.length} {visibleProducts.length === 1 ? 'essential' : 'essentials'}
         </span>

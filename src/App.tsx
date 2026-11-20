@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ProductDetails } from './components/ProductDetails';
@@ -28,11 +27,9 @@ export function App() {
   return (
     <BrowserRouter>
       <DocumentTitle />
-      <main className="page-shell">
-        <header className="page-header">
-          <p className="eyebrow">THE EVERYDAY EDIT</p>
-          <h1>Find your next favorite.</h1>
-          <p className="intro">A considered collection of useful, well-made things.</p>
+      <main>
+        <header>
+          <h1>Product Explorer</h1>
         </header>
         <Routes>
           <Route path="/products" element={<ProductList />} />
