@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export type Product = {
   id: number;
   name: string;
@@ -14,16 +16,18 @@ type ProductCardProps = {
 export function ProductCard({ product }: ProductCardProps) {
   return (
     <article className="product-card">
-      <div className={`product-art ${product.color}`} aria-hidden="true">
-        <span>{product.initials}</span>
-      </div>
-      <div className="product-info">
-        <div>
-          <p className="product-category">{product.category}</p>
-          <h2>{product.name}</h2>
+      <Link className="product-link" to={`/products/${product.id}`}>
+        <div className={`product-art ${product.color}`} aria-hidden="true">
+          <span>{product.initials}</span>
         </div>
-        <p className="product-price">${product.price.toFixed(2)}</p>
-      </div>
+        <div className="product-info">
+          <div>
+            <p className="product-category">{product.category}</p>
+            <h2>{product.name}</h2>
+          </div>
+          <p className="product-price">${product.price.toFixed(2)}</p>
+        </div>
+      </Link>
     </article>
   );
 }
